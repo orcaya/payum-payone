@@ -1,5 +1,5 @@
 {
-    "name": "valiton/payum-payone",
+    "name": "orcaya/payum-payone",
     "description": "The Payum extension. It provides PAYONE payment integration.",
     "keywords": ["payum", "payone", "payment", "psp"],
     "license": "MIT",
@@ -14,9 +14,9 @@
         }
     ],
     "require": {
-        "php": ">=7.3 | ^8.1",
+        "php": ">=7.3 | ^8.1 | ^8.3",
         "payum/core": "^1.7",
-        "psr/log": "^1.0",
+        "psr/log": "^1.0 | ^2.0 | ^3.0",
         "php-http/guzzle7-adapter": "^1.0",
         "php-http/message-factory": "^1.1"
     },
