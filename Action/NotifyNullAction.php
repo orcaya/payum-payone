@@ -47,11 +47,11 @@ class NotifyNullAction extends GatewayAwareAction implements LoggerAwareInterfac
         parse_str($httpRequest->content, $postParams);
 
         $this->logger->info('Incoming notify: ' . implode(' ', [
-                $httpRequest->method,
-                $httpRequest->uri,
-                $httpRequest->userAgent,
-                $httpRequest->content,
-            ]));
+            $httpRequest->method,
+            $httpRequest->uri,
+            $httpRequest->userAgent,
+            $httpRequest->content,
+        ]));
 
         if (empty($postParams['param'])) {
             $this->logger->error('Received notify. But token parameter "param" is missing or empty');
@@ -84,7 +84,7 @@ class NotifyNullAction extends GatewayAwareAction implements LoggerAwareInterfac
     /**
      * {@inheritDoc}
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
