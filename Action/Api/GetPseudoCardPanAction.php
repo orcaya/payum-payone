@@ -95,7 +95,7 @@ class GetPseudoCardPanAction extends BaseApiAwareAction implements GatewayAwareI
         if (1 !== preg_match('/^[a-z]{2}$/', $language)) {
             $language = 'en';
         }
-        
+
         $params = [
             'aid' => $this->options['sub_account_id'],
             'encoding' => 'UTF-8',
@@ -107,7 +107,7 @@ class GetPseudoCardPanAction extends BaseApiAwareAction implements GatewayAwareI
             'storecarddata' => 'yes',
         ];
         ksort($params);
-        $hash = hash('md5', implode('', $params) . $this->options['key']);
+        $hash = hash_hmac('sha384', implode('', $params), $this->options['key']);
 
         $this->gateway->execute($renderTemplate = new RenderTemplate($this->templateName, [
             'params' => $params,
