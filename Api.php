@@ -204,11 +204,13 @@ class Api
         $fields['mid'] = $this->options['merchant_id'];
         $fields['portalid'] = $this->options['portal_id'];
         $fields['key'] = hash('md5', $this->options['key']);
+
         if ('getfile' !== $fields['request']) {
             // "aid" may not be passed for getfile requests
             $fields['aid'] = $this->options['sub_account_id'];
         }
-        $fields['api_version'] = '3.9';
+
+        $fields['api_version'] = '3.10';
         $fields['mode'] = $this->options['sandbox'] ? 'test' : 'live';
         $fields['encoding'] = 'UTF-8';
         $fields['solution_name'] = static::SOLUTION_NAME;
@@ -273,7 +275,7 @@ class Api
             throw HttpException::factory($request, $response);
         }
 
-        return (string)$response->getBody();
+        return (string) $response->getBody();
     }
 
     /**
