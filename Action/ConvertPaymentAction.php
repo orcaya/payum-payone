@@ -40,7 +40,7 @@ class ConvertPaymentAction extends GatewayAwareAction
         $details = ArrayObject::ensureArrayObject($payment->getDetails());
 
         $details[Api::FIELD_REFERENCE] = $payment->getNumber();
-        $details[Api::FIELD_AMOUNT] = $payment->getTotalAmount();
+        $details[Api::FIELD_AMOUNT] = $payment->getTotalAmount() * 100; // Convert to cents
         $details[Api::FIELD_CURRENCY_CODE] = $payment->getCurrencyCode();
         $details[Api::FIELD_NARRATIVE_TEXT] = $payment->getDescription();
 
