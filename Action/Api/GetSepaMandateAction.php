@@ -91,7 +91,12 @@ class GetSepaMandateAction extends BaseApiAwareAction implements GatewayAwareInt
         $this->gateway->execute($httpRequest = new GetHttpRequest());
         if ('POST' === $httpRequest->method) {
             $postParams = [];
-            parse_str($httpRequest->content, $postParams);
+            $postParams = json_decode($httpRequest->content, true);
+            
+            if(!is_array($postParams)) {
+                parse_str($httpRequest->content, $postParams);
+            }
+            
             if (array_key_exists(Api::FIELD_MANDATE_IDENTIFICATION, $postParams) && null !== $postParams[Api::FIELD_MANDATE_IDENTIFICATION] && $postParams[Api::FIELD_MANDATE_IDENTIFICATION] === $model[Api::FIELD_MANDATE_IDENTIFICATION]) {
                 $model[Api::FIELD_MANDATE_DATE] = time();
 
