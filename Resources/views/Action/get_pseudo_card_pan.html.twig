@@ -91,6 +91,11 @@
 			background-color: #bb0025;
 		}
 
+		#paymentsubmit:disabled {
+			cursor: not-allowed;
+			opacity: 0.6;
+		}
+
 		#errorOutput {
 			text-align: center;
 			color: #D3002A;
@@ -406,18 +411,33 @@
 				Payone.ClientApi.Language.de.placeholders.expireYear = "JJJJ";
 
 				var iframes = new Payone.ClientApi.HostedIFrames(config, request);
+				var isProcessing = false;
+				
 				function check() {
 				// Function called by submitting PAY-button
+				if (isProcessing) {
+					return;
+				}
+				
 				if (iframes.isComplete()) {
+					isProcessing = true;
+					var submitButton = document.getElementById("paymentsubmit");
+					var originalText = submitButton.value;
+					
+					submitButton.disabled = true;
+					
 					iframes.creditCardCheck("checkCallback");
 					// Perform "CreditCardCheck" to create and get a
 					// PseudoCardPan; then call your function "checkCallback"
+					
+				
 				} else {
 					console.debug("not complete");
 				}
 				}
 				async function checkCallback(response) {
 				console.debug("checkCallback", response);
+				
 				if (response.status === "VALID") {
 					document.getElementById("pseudocardpan").value = response.pseudocardpan;
 					document.getElementById("truncatedcardpan").value =
@@ -435,7 +455,15 @@
 					} else {
 					console.debug("no parent");
 					}
+				
+				} else {
+					document.getElementById("errorOutput").innerHTML = response.customermessage || "Payment processing failed. Please try again.";
 				}
+					setTimeout(() => {
+					var submitButton = document.getElementById("paymentsubmit");
+					isProcessing = false;
+					submitButton.disabled = false;
+					}, 2000);
 				}
 
 		
