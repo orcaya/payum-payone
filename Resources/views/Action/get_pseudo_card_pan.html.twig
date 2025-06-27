@@ -138,32 +138,62 @@
 			type="hidden" name="truncatedcardpan" id="truncatedcardpan">
 			<!-- place your input fields -->
 			<div class="form-field">
-				<label for="cardpan">Cardpan:</label>
+				<label for="cardpan">
+					{% if language == 'en'%}
+						Cardpan:
+					{% elseif language == 'de' %}
+						Kartennummer:
+					{% endif %}
+				</label>
 				<div class="form-row">
 					<span id="cardpan" class="inputIframe"></span>
 					<span id="cardlogo"></span>
 				</div>
 			</div>
 			<div class="form-field">
-				<label for="cardcvc2">CVC:</label>
+				<label for="cardcvc2">
+					{% if language == 'en'%}
+						CVC:
+					{% elseif language == 'de' %}
+						Sicherheitscode:
+					{% endif %}
+				</label>
 				<span id="cardcvc2" class="inputIframe"></span>
 			</div>
 			<div class="form-field">
-				<label for="cardexpiremonth" class="expire-label">Expire Date:</label>
+				<label for="cardexpiremonth" class="expire-label">
+					{% if language == 'en'%}
+						Expire Date:
+					{% elseif language == 'de' %}
+						Ablaufdatum:
+					{% endif %}
+				</label>
 				<div class="form-row">
 					<div class="form-field expire-month">
-						<label for="cardexpiremonth">Month:</label>
+						<label for="cardexpiremonth">
+							{% if language == 'en'%}
+								Month:
+							{% elseif language == 'de' %}
+								Monat:
+							{% endif %}
+						</label>
 						<span id="cardexpiremonth"></span>
 					</div>
 					<div class="form-field expire-year">
-						<label for="cardexpireyear">Year:</label>
+						<label for="cardexpireyear">
+							{% if language == 'en'%}
+								Year:
+							{% elseif language == 'de' %}
+								Jahr:
+							{% endif %}
+						</label>
 						<span id="cardexpireyear"></span>
 					</div>
 				</div>
 			</div>
 			<div id="errorOutput"></div>
 			<div class="submit-container">
-				<input id="paymentsubmit" type="button" value="Submit" onclick="check();">
+				<input id="paymentsubmit" type="button" value={% if $language == 'en' %}"Submit"{% elseif $language == 'de' %}"Absenden"{% endif %} onclick="check();">
 			</div>
 		</fieldset>
 	</form>
