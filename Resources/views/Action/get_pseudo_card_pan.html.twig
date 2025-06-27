@@ -193,7 +193,7 @@
 			</div>
 			<div id="errorOutput"></div>
 			<div class="submit-container">
-				<input id="paymentsubmit" type="button" value={% if $language == 'en' %}"Submit"{% elseif $language == 'de' %}"Absenden"{% endif %} onclick="check();">
+				<input id="paymentsubmit" type="button" {% if language == 'en' %}value="Submit"{% elseif language == 'de' %}value="Absenden"{% endif %} onclick="check();">
 			</div>
 		</fieldset>
 	</form>
